@@ -53,4 +53,8 @@ class User extends Authenticatable
             return null;
         }
     }
+    public function doctor()
+    {
+        return $this->hasOne(Doctor::class);
+    }
 }

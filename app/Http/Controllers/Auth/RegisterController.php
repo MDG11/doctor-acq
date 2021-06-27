@@ -55,7 +55,7 @@ class RegisterController extends Controller
         if ($data['utype'] == 'Doctor') {
             $code = DoctorCode::where('code', '=', $data['doctor_code'])->first();
             if ($code && $code->user_id != null) {
-                    throw ValidationException::withMessages(['Code is used by other user']);
+                    throw ValidationException::withMessages(['doctor_code' => 'Code is used by other user']);
             }
         }
         return Validator::make($data, [
