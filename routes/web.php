@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DoctorProfileController;
+use App\Http\Controllers\user\UserAppointmentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,8 @@ Route::middleware(['auth', 'auth.doctor'])->group(function () {
     Route::post('/doctor/profile/submit', [DoctorProfileController::class, 'submit'])->name('doctor.submitprofile');
 });
 Route::middleware(['auth'])->group(function () {
-    Route::view('/test3', 'home')->name('test3');
+    Route::view('/patient/create-appointment', 'Patient.choose_specialization')->name('patient.appointment.spec');
+    Route::get('/patient/create-appointment/create/{specialization}', [UserAppointmentController::class, 'index'])->name('patient.appointment');
+    Route::post('/patient/create-appointment/submit', [UserAppointmentController::class, 'submit'])->name('appointment.submit');
 });
 

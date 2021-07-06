@@ -45,7 +45,7 @@
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('test3') }}">Register an appointment</a>
+                                    <a class="nav-link" href="{{ route('patient.appointment.spec') }}">Register an appointment</a>
                                 </li>
                                 @if (auth()->user()->utype == 'Admin')
                                     <li class='dropdown nav-item'>

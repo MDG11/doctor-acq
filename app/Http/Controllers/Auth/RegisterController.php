@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DoctorCode;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Validation\ValidationException;
-use Exception;
+use App\Rules\DoctorRegistration;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -52,18 +51,12 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        if ($data['utype'] == 'Doctor') {
-            $code = DoctorCode::where('code', '=', $data['doctor_code'])->first();
-            if ($code && $code->user_id != null) {
-                    throw ValidationException::withMessages(['doctor_code' => 'Code is used by other user']);
-            }
-        }
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'utype' => ['required'],
-            'doctor_code' => ['filled', 'exists:doctor_codes,code', 'string', 'regex: /\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/u']
+            'doctor_code' => ['filled', 'exists:doctor_codes,code', 'string', 'regex: /\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/u', new DoctorRegistration,]
         ]);
     }
 

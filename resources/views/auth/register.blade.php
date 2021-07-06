@@ -2,14 +2,22 @@
 @section('title', 'Register')
 
 @section('content')
-<main class="py-4">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Register') }}</div>
+    <main class="py-4">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">{{ __('Register') }}</div>
 
-                    <div class="card-body">
+                        <div class="card-body">
+                            <div class="row">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ implode('', $errors->all(':message')) }}
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
 
@@ -88,14 +96,12 @@
                             </div>
 
                             <div id="doctor_code-group" class="form-group row">
-                                <label for="doctor_code" class="col-md-4 col-form-label text-md-right">Doctor Code</label>
+                                <label for="doctor_code" class="col-md-4 col-form-label text-md-right">Doctor
+                                    Code</label>
 
                                 <div class="col-md-6">
                                     <input disabled id="doctor_code" name="doctor_code" type="text" class="form-control"
                                         required>
-                                    @if ($errors->any())
-                                        {!! implode('', $errors->all('<div>:message</div>')) !!}
-                                    @endif
                                 </div>
                             </div>
 
@@ -111,8 +117,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</main>
+        </div>
+    </main>
 @endsection
 @section('custom-js')
     <script>
