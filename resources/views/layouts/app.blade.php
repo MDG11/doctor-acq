@@ -45,7 +45,11 @@
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('patient.appointment.spec') }}">Register an appointment</a>
+                                    <a class="nav-link" href="{{ route('patient.appointmentlist') }}">My appointments</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('patient.appointment.spec') }}">Register an
+                                        appointment</a>
                                 </li>
                                 @if (auth()->user()->utype == 'Admin')
                                     <li class='dropdown nav-item'>
@@ -79,8 +83,9 @@
                         @else
                             <li class="nav-item dropdown">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                         document.getElementById('logout-form').submit();">
+                                <a class="nav-link" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                                             document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

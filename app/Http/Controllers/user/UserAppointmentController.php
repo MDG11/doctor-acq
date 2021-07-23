@@ -13,7 +13,17 @@ use Illuminate\Http\Request;
 
 class UserAppointmentController extends Controller
 {
-    public function index($specialization)
+    public function index()
+    {
+        $appointments = Appointment::where('finish_time','>',Carbon::now())->where('user_id',auth()->id())->orderBy('finish_time', 'desc')->paginate(10);
+        return view('Patient.appointments_index', compact('appointments'));
+    }
+    public function all()
+    {
+        $appointments = Appointment::where('user_id',auth()->id())->orderBy('finish_time', 'desc')->paginate(10);
+        return view('Patient.appointments_index', compact('appointments'));
+    }
+    public function create($specialization)
     {
         $specialization = str_replace('-', ' ', $specialization);
         $doctors = Doctor::where('specialization', $specialization)->get();
@@ -52,5 +62,11 @@ class UserAppointmentController extends Controller
         $appointment->user_id = auth()->id();
         $appointment->save();
         return back()->with('success', 'Appointment created successfully!');
+    }
+    public function delete($id)
+    {
+        $appointment = Appointment::find($id);
+        $appointment->delete();
+        return back()->with('success','Appointment deleted successfully');
     }
 }

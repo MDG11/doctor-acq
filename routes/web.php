@@ -28,8 +28,11 @@ Route::middleware(['auth', 'auth.doctor'])->group(function () {
     Route::post('/doctor/profile/submit', [DoctorProfileController::class, 'submit'])->name('doctor.submitprofile');
 });
 Route::middleware(['auth'])->group(function () {
+    Route::get('/patient/appointments/all', [UserAppointmentController::class, 'all'])->name('patient.appointments.all');
+    Route::get('/patient/appointments/', [UserAppointmentController::class, 'index'])->name('patient.appointmentlist');
     Route::view('/patient/create-appointment', 'Patient.choose_specialization')->name('patient.appointment.spec');
-    Route::get('/patient/create-appointment/create/{specialization}', [UserAppointmentController::class, 'index'])->name('patient.appointment');
+    Route::get('/patient/create-appointment/create/{specialization}', [UserAppointmentController::class, 'create'])->name('patient.appointment');
     Route::post('/patient/create-appointment/submit', [UserAppointmentController::class, 'submit'])->name('appointment.submit');
+    Route::get('/patients/appointment/delete/{id}', [UserAppointmentController::class, 'delete'])->name('patient.appointment.delete');
 });
 
