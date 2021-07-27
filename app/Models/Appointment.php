@@ -11,7 +11,7 @@ class Appointment extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public function patient()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

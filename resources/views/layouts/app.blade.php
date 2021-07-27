@@ -46,6 +46,9 @@
                                 <li class="nav-item">
                                     <a href="{{ route('doctor.appointments') }}" class="nav-link">Check Appointment</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('doctor.appointments.today') }}" class="nav-link">Your Active Appointments</a>
+                                </li>
                             @else
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('patient.appointmentlist') }}">My appointments</a>

@@ -30,7 +30,9 @@ Route::middleware(['auth', 'auth.doctor'])->group(function () {
 
     Route::post('/doctor/appointment/', [DoctorAppointmentController::class, 'show'])->name('doctor.appointment.show');
     Route::view('/doctor/appointments/', 'Doctor.appointments.index')->name('doctor.appointments');
-    Route::get('/doctor/appointment/{method}/{appointment:appointment_code}', [DoctorAppointmentController::class, 'make_pdf'])->name('doctor.appointment.pdf');
+    Route::get('/doctor/appointments/today', [DoctorAppointmentController::class, 'today'])->name('doctor.appointments.today');
+    Route::get('/doctor/appointment/pdf/{method}/{appointment:appointment_code}', [DoctorAppointmentController::class, 'make_pdf'])->name('doctor.appointment.pdf');
+    Route::get('/doctor/appointment/end/{appointment:appointment_code}', [DoctorAppointmentController::class, 'end'])->name('doctor.appointment.end');
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/patient/appointments/all', [UserAppointmentController::class, 'all'])->name('patient.appointments.all');

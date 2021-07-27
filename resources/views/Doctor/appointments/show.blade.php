@@ -9,6 +9,7 @@
     <div class="container" style="margin: 5vh 15vw">
         <div class="row">
             <div class="col-md-12">
+                <a style="right: 0; position:absolute;" href="{{ route('doctor.appointment.end', ['appointment' => $appointment]) }}" class='btn btn-primary'>End appointment</a>
                 <h1 style="text-align: center">Appointment #<i
                         style="color: gray">{{ $appointment->appointment_code }}</i></h1>
                 @include('Doctor.appointments.book')
