@@ -43,6 +43,9 @@
                                 <li class="nav-item">
                                     <a href="{{ route('doctor.profile') }}" class="nav-link">Doctor Profile</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('doctor.appointments') }}" class="nav-link">Check Appointment</a>
+                                </li>
                             @else
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('patient.appointmentlist') }}">My appointments</a>

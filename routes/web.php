@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\doctor\DoctorAppointmentController;
 use App\Http\Controllers\DoctorProfileController;
 use App\Http\Controllers\user\UserAppointmentController;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,10 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admin')->group(function () {
 Route::middleware(['auth', 'auth.doctor'])->group(function () {
     Route::get('/doctor/profile', [DoctorProfileController::class, 'index'])->name('doctor.profile');
     Route::post('/doctor/profile/submit', [DoctorProfileController::class, 'submit'])->name('doctor.submitprofile');
+
+    Route::post('/doctor/appointment/', [DoctorAppointmentController::class, 'show'])->name('doctor.appointment.show');
+    Route::view('/doctor/appointments/', 'Doctor.appointments.index')->name('doctor.appointments');
+    Route::get('/doctor/appointment/{method}/{appointment:appointment_code}', [DoctorAppointmentController::class, 'make_pdf'])->name('doctor.appointment.pdf');
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/patient/appointments/all', [UserAppointmentController::class, 'all'])->name('patient.appointments.all');
