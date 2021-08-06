@@ -39,6 +39,6 @@ class DeleteOutdatedAppointments extends Command
      */
     public function handle()
     {
-        return Appointment::where('updated_at', '<', Carbon::now())->delete();
+        return Appointment::where('finish_time', '<', Carbon::now())->delete();
     }
 }
